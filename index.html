@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahsan Vila (আহসান ভিলা) — Flats for Rent · বাজিতপুর, Kishoreganj</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=Hind+Siliguri:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2c6e49;
+    --primary-light: #4a9068;
+    --primary-pale: #e8f5ee;
+    --dark: #1b2d25;
+    --dark2: #243d31;
+    --white: #ffffff;
+    --off-white: #f7faf8;
+    --border: #d4e8db;
+    --text: #2a3d32;
+    --muted: #6a8a75;
+    --occupied-bg: #fff3ee;
+    --occupied-border: #f0c4a8;
+    --occupied-text: #c05a1a;
+    --vacant-bg: #eaf6ef;
+    --vacant-border: #a8d8bb;
+    --vacant-text: #1e7a42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(27,45,37,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #fff; }
+  .nav-logo span { color: #7ecfa0; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem; transition: color 0.3s; }
+  .nav-links a:hover { color: #7ecfa0; }
+  .nav-phone { color: #7ecfa0; font-weight: 500; font-size: 0.9rem; text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(140deg, #1b2d25 0%, #1e4535 55%, #245c3e 100%);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center;
+    position: relative; overflow: hidden; padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 25% 60%, rgba(126,207,160,0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 30%, rgba(224,123,57,0.07) 0%, transparent 50%);
+  }
+
+  .hero-tag { font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: #7ecfa0; margin-bottom: 1.4rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 5.5rem); color: #fff; line-height: 1.1; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+  .hero h1 span { color: #7ecfa0; }
+
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.5); margin-top: 1.2rem; max-width: 460px; line-height: 1.75; font-weight: 300; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+
+  .hero-divider { width: 48px; height: 2px; background: #7ecfa0; margin: 1.8rem auto; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+
+  .btn { padding: 0.8rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; letter-spacing: 0.04em; border-radius: 6px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; display: inline-block; font-weight: 500; }
+  .btn-primary { background: var(--primary-light); color: #fff; border: 2px solid var(--primary-light); }
+  .btn-primary:hover { background: #5aaa7a; border-color: #5aaa7a; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(74,144,104,0.4); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.85); border: 2px solid rgba(255,255,255,0.25); }
+  .btn-outline:hover { border-color: #7ecfa0; color: #7ecfa0; transform: translateY(-2px); }
+
+  .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.28); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 34px; background: #7ecfa0; animation: scrollLine 1.5s ease infinite; }
+
+  @keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom} }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--primary-light); margin-bottom: 0.7rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 4vw, 2.8rem); color: var(--dark); line-height: 1.2; margin-bottom: 0.9rem; }
+  .section-desc { color: var(--muted); max-width: 520px; line-height: 1.8; font-weight: 300; }
+  .green-line { width: 44px; height: 2px; background: var(--primary-light); margin: 1.4rem 0; }
+
+  /* OVERVIEW */
+  #overview { background: var(--off-white); }
+
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+
+  .overview-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.8rem; }
+
+  .stat-card { background: var(--white); padding: 1.4rem; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(44,110,73,0.06); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); line-height: 1; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.35rem; }
+
+  .amenity-list { margin-top: 1.8rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .amenity-item { display: flex; align-items: center; gap: 0.8rem; font-size: 0.95rem; color: var(--text); }
+  .amenity-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--primary-pale); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+
+  .overview-map { border-radius: 14px; overflow: hidden; box-shadow: 0 16px 48px rgba(44,110,73,0.15); border: 3px solid var(--primary-light); }
+  .overview-map iframe { width: 100%; height: 360px; display: block; border: none; }
+
+  /* FLATS */
+  #flats { background: #f0f7f3; }
+
+  .owner-panel { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.4rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .owner-panel-icon { font-size: 1.3rem; }
+  .owner-panel-text { flex: 1; }
+  .owner-panel-title { font-weight: 500; color: var(--dark); font-size: 0.95rem; }
+  .owner-panel-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; }
+  .owner-panel-btn { padding: 0.55rem 1.1rem; background: var(--primary); color: #fff; border: none; border-radius: 6px; font-size: 0.82rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+  .owner-panel-btn:hover { background: var(--primary-light); }
+
+  .floor-group { margin-bottom: 3rem; }
+  .floor-label { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
+  .floor-label::before { content: ''; display: inline-block; width: 16px; height: 2px; background: var(--primary-light); }
+
+  .flats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+  /* FLAT CARD */
+  .flat-card { background: var(--white); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s ease; }
+  .flat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(44,110,73,0.12); border-color: var(--primary-light); }
+  .flat-card.owner-unit { border-color: #c8dfd5; background: #f4faf7; opacity: 0.72; }
+  .flat-card.owner-unit:hover { transform: none; box-shadow: none; }
+
+  .flat-header { background: var(--dark); padding: 1.5rem 1.5rem 1.3rem; position: relative; }
+  .flat-card.owner-unit .flat-header { background: #3a6655; }
+  .flat-floor-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 0.35rem; }
+  .flat-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; }
+
+  .flat-status-badge { position: absolute; top: 1.1rem; right: 1.1rem; padding: 0.28rem 0.7rem; border-radius: 20px; font-size: 0.67rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .badge-occupied { background: var(--occupied-bg); color: var(--occupied-text); border: 1px solid var(--occupied-border); }
+  .badge-vacant { background: var(--vacant-bg); color: var(--vacant-text); border: 1px solid var(--vacant-border); }
+  .badge-owner { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.18); }
+
+  .flat-body { padding: 1.4rem; }
+  .flat-detail { display: flex; justify-content: space-between; align-items: center; padding: 0.52rem 0; border-bottom: 1px solid #f0f5f2; font-size: 0.88rem; }
+  .flat-detail:last-of-type { border-bottom: none; }
+  .flat-detail-label { color: var(--muted); }
+  .flat-detail-val { font-weight: 500; color: var(--dark); text-align: right; }
+  .flat-detail-val.tbd { color: #b0c4b8; font-style: italic; font-weight: 300; }
+
+  .flat-actions { margin-top: 1.1rem; }
+  .flat-enquire { width: 100%; padding: 0.7rem; background: var(--primary); color: #fff; border: none; border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+  .flat-enquire:hover:not(:disabled) { background: var(--primary-light); transform: translateY(-1px); }
+  .flat-enquire:disabled { background: #c8dcd2; color: #8aaa98; cursor: not-allowed; transform: none; }
+
+  .owner-note { text-align: center; padding: 1.5rem 0.5rem; color: var(--muted); font-size: 0.85rem; font-style: italic; }
+
+  /* STATUS TOGGLE */
+  .status-toggle-wrap { display: none; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border); align-items: center; flex-wrap: wrap; }
+  .status-toggle-wrap.visible { display: flex; }
+  .status-toggle-label { font-size: 0.76rem; color: var(--muted); flex: 0 0 100%; }
+  .toggle-btn { padding: 0.38rem 0.85rem; border-radius: 20px; font-size: 0.76rem; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; border: 1px solid; transition: all 0.25s; }
+  .toggle-vacant { background: var(--vacant-bg); color: var(--vacant-text); border-color: var(--vacant-border); }
+  .toggle-vacant.active, .toggle-vacant:hover { background: var(--vacant-text); color: #fff; }
+  .toggle-occupied { background: var(--occupied-bg); color: var(--occupied-text); border-color: var(--occupied-border); }
+  .toggle-occupied.active, .toggle-occupied:hover { background: var(--occupied-text); color: #fff; }
+
+  /* CONTACT */
+  #contact { background: var(--dark); }
+  #contact .section-title { color: #fff; }
+  #contact .section-desc { color: rgba(255,255,255,0.42); }
+  #contact .section-label { color: #7ecfa0; }
+  #contact .green-line { background: #7ecfa0; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+  .contact-item { display: flex; gap: 1.1rem; align-items: flex-start; margin-bottom: 1.8rem; }
+  .contact-icon { width: 42px; height: 42px; border-radius: 8px; background: rgba(126,207,160,0.1); border: 1px solid rgba(126,207,160,0.18); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-item-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #7ecfa0; margin-bottom: 0.25rem; }
+  .contact-item-val { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+  .contact-item-val a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+  .contact-item-val a:hover { color: #7ecfa0; }
+
+  .query-form { background: rgba(255,255,255,0.05); border: 1px solid rgba(126,207,160,0.14); border-radius: 12px; padding: 2rem; }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; margin-bottom: 1.4rem; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.45rem; }
+  .form-input, .form-select, .form-textarea { width: 100%; padding: 0.72rem 1rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(126,207,160,0.18); border-radius: 6px; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; transition: border-color 0.3s; outline: none; }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.22); }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #7ecfa0; }
+  .form-select option { background: var(--dark2); color: #fff; }
+  .form-textarea { resize: vertical; min-height: 88px; }
+  .form-submit { width: 100%; padding: 0.82rem; background: var(--primary-light); color: #fff; border: none; border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; letter-spacing: 0.04em; transition: all 0.3s; }
+  .form-submit:hover { background: #5aaa7a; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(74,144,104,0.3); }
+  .form-success { display: none; background: rgba(126,207,160,0.1); border: 1px solid rgba(126,207,160,0.28); border-radius: 6px; padding: 0.9rem; color: #7ecfa0; text-align: center; margin-top: 1rem; font-size: 0.88rem; }
+
+  /* FOOTER */
+  footer { background: #111e17; padding: 2rem; text-align: center; border-top: 1px solid rgba(126,207,160,0.1); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 0.4rem; }
+  .footer-logo span { color: #7ecfa0; }
+  .footer-sub { color: rgba(255,255,255,0.28); font-size: 0.8rem; line-height: 1.8; }
+
+  /* WHATSAPP FLOAT */
+  .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; width: 52px; height: 52px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(37,211,102,0.4); z-index: 999; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; animation: pulse 2.5s infinite; }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 26px rgba(37,211,102,0.55); }
+  .whatsapp-float svg { width: 26px; height: 26px; fill: white; }
+  @keyframes pulse { 0%,100%{box-shadow:0 4px 18px rgba(37,211,102,0.4)}50%{box-shadow:0 4px 30px rgba(37,211,102,0.65)} }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(27,45,37,0.88); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 14px; padding: 2.2rem; max-width: 430px; width: 100%; position: relative; border-top: 4px solid var(--primary-light); }
+  .modal-close { position: absolute; top: 1rem; right: 1rem; width: 30px; height: 30px; background: #f0f4f2; border: none; border-radius: 50%; cursor: pointer; font-size: 1rem; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .modal-close:hover { background: #e0ece0; }
+  .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--dark); margin-bottom: 0.4rem; }
+  .modal-unit { color: var(--primary-light); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.3rem; }
+  .modal-contact-btn { display: flex; align-items: center; gap: 0.8rem; padding: 0.88rem 1.1rem; border-radius: 8px; text-decoration: none; margin-bottom: 0.72rem; transition: all 0.3s; font-weight: 500; font-size: 0.9rem; }
+  .modal-call { background: var(--dark); color: #fff; }
+  .modal-call:hover { background: var(--dark2); transform: translateX(4px); }
+  .modal-wa { background: #25d366; color: white; }
+  .modal-wa:hover { background: #1db954; transform: translateX(4px); }
+  .modal-contact-btn span:first-child { font-size: 1.15rem; }
+
+  /* OWNER BAR */
+  #owner-mode-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--dark); border-top: 2px solid var(--primary-light); padding: 0.75rem 1.5rem; z-index: 150; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  #owner-mode-bar.active { display: flex; }
+  .owner-bar-text { color: #7ecfa0; font-size: 0.85rem; font-weight: 500; flex: 1; }
+  .owner-bar-close { background: none; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.55); border-radius: 6px; padding: 0.35rem 0.9rem; font-size: 0.8rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.3s; }
+  .owner-bar-close:hover { border-color: #ff8a8a; color: #ff8a8a; }
+
+  .bn { font-family: 'Hind Siliguri', sans-serif; }
+  .hero-title-bn { font-family: 'Hind Siliguri', sans-serif; font-size: clamp(1.4rem, 3.5vw, 2.4rem); color: rgba(255,255,255,0.55); display: block; margin-top: 0.4rem; font-weight: 300; letter-spacing: 0.02em; }
+  .nav-logo-bn { font-family: 'Hind Siliguri', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.45); display: block; line-height: 1; margin-top: 1px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+
+  @media (max-width: 768px) {
+    .overview-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    Ahsan <span>Vila</span>
+    <span class="nav-logo-bn">আহসান ভিলা</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#flats">Flats</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:01711381072" class="nav-phone">📞 01711-381072</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Residential Flats for Rent · বাজিতপুর (Bajitpur), Kishoreganj</p>
+  <h1>Ahsan <span>Vila</span><span class="hero-title-bn">আহসান ভিলা</span></h1>
+  <p class="hero-sub">A well-kept 3-storied residential building with 4 quality flats in Nandina, বাজিতপুর (Bajitpur).</p>
+  <div class="hero-divider"></div>
+  <div class="hero-cta">
+    <a href="#flats" class="btn btn-primary">View Flats</a>
+    <a href="#contact" class="btn btn-outline">Contact Owner</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <p class="section-label">About the Property</p>
+    <h2 class="section-title">Ahsan Vila <span class="bn" style="font-size:1.6rem;color:var(--primary-light)">আহসান ভিলা</span></h2>
+    <p class="section-desc">4 well-planned flats across 3 floors in a peaceful neighbourhood. Owned by <strong>A.N.M Habib Ahsan</strong>.</p>
+    <div class="green-line"></div>
+
+    <div class="overview-grid">
+      <div>
+        <div class="overview-stats">
+          <div class="stat-card">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Rental Flats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Floors</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">৳6,500</div>
+            <div class="stat-label">Rent / Month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">1000ft</div>
+            <div class="stat-label">Deep Tubewell</div>
+          </div>
+        </div>
+        <div class="amenity-list">
+          <div class="amenity-item"><div class="amenity-icon">🧾</div><span>Rent ৳6,500/month — water & all common charges included (electricity extra)</span></div>
+          <div class="amenity-item"><div class="amenity-icon">🕘</div><span>Visiting hours: 9:00 AM – 5:00 PM daily</span></div>
+          <div class="amenity-item"><div class="amenity-icon">📍</div><span>Nandina, বাজিতপুর (Bajitpur) — 2336, Kishoreganj, Dhaka</span></div>
+          <div class="amenity-item"><div class="amenity-icon">👤</div><span>Owner: <strong>A.N.M Habib Ahsan</strong></span></div>
+        </div>
+      </div>
+      <div>
+        <div class="overview-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d90.9423455!3d24.2091607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3756a147681c900f%3A0x813479f1a85adba7!2sAhsan%20vila!5e0!3m2!1sen!2sbd!4v1710000000000"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ahsan Vila Location">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLATS -->
+<section id="flats">
+  <div class="container">
+    <p class="section-label">Available Units</p>
+    <h2 class="section-title">Our Flats</h2>
+    <p class="section-desc">4 flats across 3 floors. Ground floor: 2 units. 2nd floor: owner's residence (not for rent). 3rd floor: 2 units.</p>
+    <div class="green-line"></div>
+
+    <!-- Owner Management Panel -->
+    <div class="owner-panel">
+      <div class="owner-panel-icon">🔧</div>
+      <div class="owner-panel-text">
+        <div class="owner-panel-title">Owner? Update flat availability</div>
+        <div class="owner-panel-sub">Toggle any flat between Occupied and Vacant instantly</div>
+      </div>
+      <button class="owner-panel-btn" id="mgmt-btn" onclick="toggleOwnerMode()">Enable Management Mode</button>
+    </div>
+
+    <!-- GROUND FLOOR -->
+    <div class="floor-group">
+      <div class="floor-label">Ground Floor — 2 Flats</div>
+      <div class="flats-row">
+        <!-- Flat A -->
+        <div class="flat-card" id="card-A">
+          <div class="flat-header">
+            <div class="flat-floor-tag">Ground Floor</div>
+            <div class="flat-name">Flat A</div>
+            <span class="flat-status-badge badge-occupied" id="badge-A">Occupied</span>
+          </div>
+          <div class="flat-body">
+            <div class="flat-detail"><span class="flat-detail-label">Floor</span><span class="flat-detail-val">Ground</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Rent / Month</span><span class="flat-detail-val">৳6,500</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Includes</span><span class="flat-detail-val">Water + charges</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Electricity</span><span class="flat-detail-val">Tenant's account</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Bedrooms</span><span class="flat-detail-val">2 (1 attached bath)</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Washrooms</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Kitchen</span><span class="flat-detail-val">✓ Separate</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Drawing &amp; Dining</span><span class="flat-detail-val">✓ Combined</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Balconies</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-actions">
+              <button class="flat-enquire" id="enquire-A" disabled>Currently Occupied</button>
+            </div>
+            <div class="status-toggle-wrap" id="toggle-A">
+              <span class="status-toggle-label">Change status:</span>
+              <button class="toggle-btn toggle-vacant" onclick="setStatus('A','vacant')">Mark Vacant</button>
+              <button class="toggle-btn toggle-occupied active" onclick="setStatus('A','occupied')">Mark Occupied</button>
+            </div>
+          </div>
+        </div>
+        <!-- Flat B -->
+        <div class="flat-card" id="card-B">
+          <div class="flat-header">
+            <div class="flat-floor-tag">Ground Floor</div>
+            <div class="flat-name">Flat B</div>
+            <span class="flat-status-badge badge-occupied" id="badge-B">Occupied</span>
+          </div>
+          <div class="flat-body">
+            <div class="flat-detail"><span class="flat-detail-label">Floor</span><span class="flat-detail-val">Ground</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Rent / Month</span><span class="flat-detail-val">৳6,500</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Includes</span><span class="flat-detail-val">Water + charges</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Electricity</span><span class="flat-detail-val">Tenant's account</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Bedrooms</span><span class="flat-detail-val">2 (1 attached bath)</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Washrooms</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Kitchen</span><span class="flat-detail-val">✓ Separate</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Drawing &amp; Dining</span><span class="flat-detail-val">✓ Combined</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Balconies</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-actions">
+              <button class="flat-enquire" id="enquire-B" disabled>Currently Occupied</button>
+            </div>
+            <div class="status-toggle-wrap" id="toggle-B">
+              <span class="status-toggle-label">Change status:</span>
+              <button class="toggle-btn toggle-vacant" onclick="setStatus('B','vacant')">Mark Vacant</button>
+              <button class="toggle-btn toggle-occupied active" onclick="setStatus('B','occupied')">Mark Occupied</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2ND FLOOR OWNER -->
+    <div class="floor-group">
+      <div class="floor-label">2nd Floor — Owner's Residence</div>
+      <div class="flats-row" style="max-width:340px;">
+        <div class="flat-card owner-unit">
+          <div class="flat-header">
+            <div class="flat-floor-tag">2nd Floor</div>
+            <div class="flat-name">Owner's Home</div>
+            <span class="flat-status-badge badge-owner">Not for Rent</span>
+          </div>
+          <div class="flat-body">
+            <p class="owner-note">This floor is the owner's private residence and is not available for rent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3RD FLOOR -->
+    <div class="floor-group">
+      <div class="floor-label">3rd Floor — 2 Flats</div>
+      <div class="flats-row">
+        <!-- Flat C -->
+        <div class="flat-card" id="card-C">
+          <div class="flat-header">
+            <div class="flat-floor-tag">3rd Floor</div>
+            <div class="flat-name">Flat C</div>
+            <span class="flat-status-badge badge-occupied" id="badge-C">Occupied</span>
+          </div>
+          <div class="flat-body">
+            <div class="flat-detail"><span class="flat-detail-label">Floor</span><span class="flat-detail-val">3rd</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Rent / Month</span><span class="flat-detail-val">৳6,500</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Includes</span><span class="flat-detail-val">Water + charges</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Electricity</span><span class="flat-detail-val">Tenant's account</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Bedrooms</span><span class="flat-detail-val">2 (1 attached bath)</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Washrooms</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Kitchen</span><span class="flat-detail-val">✓ Separate</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Drawing &amp; Dining</span><span class="flat-detail-val">✓ Combined</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Balconies</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-actions">
+              <button class="flat-enquire" id="enquire-C" disabled>Currently Occupied</button>
+            </div>
+            <div class="status-toggle-wrap" id="toggle-C">
+              <span class="status-toggle-label">Change status:</span>
+              <button class="toggle-btn toggle-vacant" onclick="setStatus('C','vacant')">Mark Vacant</button>
+              <button class="toggle-btn toggle-occupied active" onclick="setStatus('C','occupied')">Mark Occupied</button>
+            </div>
+          </div>
+        </div>
+        <!-- Flat D -->
+        <div class="flat-card" id="card-D">
+          <div class="flat-header">
+            <div class="flat-floor-tag">3rd Floor</div>
+            <div class="flat-name">Flat D</div>
+            <span class="flat-status-badge badge-occupied" id="badge-D">Occupied</span>
+          </div>
+          <div class="flat-body">
+            <div class="flat-detail"><span class="flat-detail-label">Floor</span><span class="flat-detail-val">3rd</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Rent / Month</span><span class="flat-detail-val">৳6,500</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Includes</span><span class="flat-detail-val">Water + charges</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Electricity</span><span class="flat-detail-val">Tenant's account</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Bedrooms</span><span class="flat-detail-val">2 (1 attached bath)</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Washrooms</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Kitchen</span><span class="flat-detail-val">✓ Separate</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Drawing &amp; Dining</span><span class="flat-detail-val">✓ Combined</span></div>
+            <div class="flat-detail"><span class="flat-detail-label">Balconies</span><span class="flat-detail-val">2</span></div>
+            <div class="flat-actions">
+              <button class="flat-enquire" id="enquire-D" disabled>Currently Occupied</button>
+            </div>
+            <div class="status-toggle-wrap" id="toggle-D">
+              <span class="status-toggle-label">Change status:</span>
+              <button class="toggle-btn toggle-vacant" onclick="setStatus('D','vacant')">Mark Vacant</button>
+              <button class="toggle-btn toggle-occupied active" onclick="setStatus('D','occupied')">Mark Occupied</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Contact the Owner</h2>
+    <p class="section-desc">Reach out to <strong style="color:#7ecfa0">A.N.M Habib Ahsan</strong> — we reply on WhatsApp and phone. Visiting hours: 9 AM – 5 PM.</p>
+    <div class="green-line"></div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Phone / WhatsApp</div>
+            <div class="contact-item-val"><a href="tel:01711381072">01711-381072</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">👤</div>
+          <div>
+            <div class="contact-item-label">Owner</div>
+            <div class="contact-item-val" style="color:rgba(255,255,255,0.85)">A.N.M Habib Ahsan</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Address / ঠিকানা</div>
+            <div class="contact-item-val">
+              <a href="https://maps.google.com/?q=24.2091607,90.9423455" target="_blank">
+                Ahsan Vila (আহসান ভিলা)<br>
+                Nandina, বাজিতপুর (Bajitpur) — 2336<br>
+                Kishoreganj, Dhaka
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕘</div>
+          <div>
+            <div class="contact-item-label">Visiting Hours</div>
+            <div class="contact-item-val" style="color:rgba(255,255,255,0.7)">9:00 AM – 5:00 PM (Daily)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="query-form">
+        <div class="form-title">Send a Query</div>
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" id="f-name" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" id="f-phone" placeholder="Your contact number">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Interested In</label>
+          <select class="form-select" id="f-flat">
+            <option value="">Select a flat</option>
+            <option>Flat A — Ground Floor</option>
+            <option>Flat B — Ground Floor</option>
+            <option>Flat C — 3rd Floor</option>
+            <option>Flat D — 3rd Floor</option>
+            <option>General Inquiry / Visit</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Any questions or requirements..."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitQuery()">Send via WhatsApp →</button>
+        <div class="form-success" id="form-success">✓ Opening WhatsApp with your message...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ahsan <span>Vila</span> <span class="bn" style="font-size:1.1rem;color:rgba(255,255,255,0.45);font-weight:300">(আহসান ভিলা)</span></div>
+  <p class="footer-sub">
+    Owner: A.N.M Habib Ahsan &nbsp;·&nbsp; 📞 01711-381072<br>
+    Nandina, বাজিতপুর (Bajitpur) — 2336, Kishoreganj, Dhaka, Bangladesh<br>
+    Visiting Hours: 9 AM – 5 PM
+  </p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/8801711381072" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- OWNER MODE BAR -->
+<div id="owner-mode-bar">
+  <span class="owner-bar-text">🔧 Management Mode Active — toggle flat statuses on the cards above</span>
+  <button class="owner-bar-close" onclick="toggleOwnerMode()">Exit Management Mode</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Enquire About</h3>
+    <div class="modal-unit" id="modal-unit">Flat A</div>
+    <p style="color:var(--muted);font-size:0.86rem;margin-bottom:1.3rem;">Choose how you'd like to reach us:</p>
+    <a href="tel:01711381072" class="modal-contact-btn modal-call">
+      <span>📞</span><span>Call: 01711-381072</span>
+    </a>
+    <a id="modal-wa-link" href="#" class="modal-contact-btn modal-wa" target="_blank">
+      <span>💬</span><span>WhatsApp the owner</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const statuses = { A:'occupied', B:'occupied', C:'occupied', D:'occupied' };
+
+  function getFlatFloor(id) {
+    return (id==='A'||id==='B') ? 'Ground Floor' : '3rd Floor';
+  }
+
+  function setStatus(id, status) {
+    statuses[id] = status;
+    const badge = document.getElementById('badge-'+id);
+    const btn   = document.getElementById('enquire-'+id);
+    const wrap  = document.getElementById('toggle-'+id);
+
+    if (status === 'vacant') {
+      badge.className = 'flat-status-badge badge-vacant';
+      badge.textContent = 'Vacant';
+      btn.disabled = false;
+      btn.textContent = 'Enquire Now';
+      btn.onclick = () => openModal('Flat '+id, getFlatFloor(id));
+      wrap.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      wrap.querySelector('.toggle-vacant').classList.add('active');
+    } else {
+      badge.className = 'flat-status-badge badge-occupied';
+      badge.textContent = 'Occupied';
+      btn.disabled = true;
+      btn.textContent = 'Currently Occupied';
+      btn.onclick = null;
+      wrap.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      wrap.querySelector('.toggle-occupied').classList.add('active');
+    }
+  }
+
+  let ownerMode = false;
+  function toggleOwnerMode() {
+    ownerMode = !ownerMode;
+    ['A','B','C','D'].forEach(id => {
+      document.getElementById('toggle-'+id).classList.toggle('visible', ownerMode);
+    });
+    document.getElementById('owner-mode-bar').classList.toggle('active', ownerMode);
+    const btn = document.getElementById('mgmt-btn');
+    btn.textContent = ownerMode ? 'Exit Management Mode' : 'Enable Management Mode';
+    btn.style.background = ownerMode ? '#c05a1a' : '';
+  }
+
+  function openModal(flatName, floor) {
+    document.getElementById('modal-unit').textContent = flatName+' — '+floor;
+    const msg = encodeURIComponent('Hello, I am interested in renting '+flatName+' ('+floor+') at Ahsan Vila, Bajitpur. Please share details.');
+    document.getElementById('modal-wa-link').href = 'https://wa.me/8801711381072?text='+msg;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+  function submitQuery() {
+    const name  = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const flat  = document.getElementById('f-flat').value;
+    const msg   = document.getElementById('f-msg').value.trim();
+    if (!name||!phone){ alert('Please enter your name and phone number.'); return; }
+    const text = `Hello, my name is ${name}. Phone: ${phone}. Enquiring about: ${flat||'General Inquiry'}. ${msg?'Message: '+msg:''}`;
+    document.getElementById('form-success').style.display = 'block';
+    setTimeout(()=>{ window.open('https://wa.me/8801711381072?text='+encodeURIComponent(text),'_blank'); }, 700);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',function(e){
+      const t=document.querySelector(this.getAttribute('href'));
+      if(t){ e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-68,behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
